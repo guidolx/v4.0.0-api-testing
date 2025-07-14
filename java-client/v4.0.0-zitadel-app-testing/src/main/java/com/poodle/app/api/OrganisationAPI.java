@@ -12,17 +12,16 @@ public class OrganisationAPI {
         this.zitadel = zitadel;
     }
 
-    public OrganizationServiceListOrganizationsResponse listOrganisations(){
+    public OrganizationServiceListOrganizationsResponse listOrganisationsByName(String name){
         OrganizationServiceApi orgs = zitadel.getOrganizations();
         OrganizationServiceListOrganizationsRequest request = new OrganizationServiceListOrganizationsRequest();
         OrganizationServiceSearchQuery searchQuery = new OrganizationServiceSearchQuery();
         OrganizationServiceOrganizationNameQuery nameQuery = new OrganizationServiceOrganizationNameQuery();
-        nameQuery.setName("ZITADEL");
+        nameQuery.setName(name);
         searchQuery.setNameQuery(nameQuery);
         request.addQueriesItem(searchQuery);
         OrganizationServiceListQuery query = new OrganizationServiceListQuery();
-        OrganizationServiceListOrganizationsResponse response = orgs.listOrganizations(request);
-        return response;
+        return orgs.listOrganizations(request);
 
     }
 
